@@ -265,6 +265,8 @@ assign [class="steam_app_954850"] $ws6 # KSP 2
 assign [class="steam_app_606280"] $ws6 # darksiders 3
 assign [class="steam_app_1313140"] $ws6 # Cult of The Lamb
 assign [class="steam_app_548430"] $ws6 # Deep Rock Galactic
+assign [class="steam_app_1604030"] $ws6 # V rising
+assign [class="steam_app_235460"] $ws6 # Metal Gear Rising: Revengence
 assign [class="Celeste.bin.x86_64"] $ws6
 assign [class="riotclientux.exe"] $ws6
 assign [class="leagueclientux.exe"] $ws6
@@ -307,23 +309,19 @@ exec_always --no-startup-id picom --config  ~/.config/picom.conf
 #############################################
 
 #get auth work with polkit-gnome
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id rofi-polkit-agent
 
 #exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
-exec --no-startup-id dex --autostart --environment i3
+# exec --no-startup-id dex --autostart --environment i3
 
 # num lock activated
 exec --no-startup-id numlockx on
 
-# start a script to setup displays
-exec --no-startup-id ~/.screenlayout/monitor.sh
-
 # set wallpaper
-# exec --no-startup-id sleep 2 && nitrogen --restore
 exec --no-startup-id sleep 1 && feh --bg-fill --no-fehbg --randomize $HOME/Pictures/wallpapers/distrotube-wallpapers
 
 # set powersavings for display:
-exec --no-startup-id xset s 480 dpms 600 600 600
+# exec --no-startup-id xset s 480 dpms 600 600 600
 
 # xscreensaver
 # https://www.jwz.org/xscreensaver
@@ -334,6 +332,9 @@ exec --no-startup-id dunst
 
 # Emacs daemon
 exec --no-startup-id /sbin/emacs --daemon
+
+# udiskie
+exec --no-startup-id udiskie -A
 
 # headp
 bindsym $mod+F1 exec headp -c
@@ -425,7 +426,8 @@ bindsym $mod+d exec rofi -modi drun -show drun \
 
 bindsym $mod+t exec rofi -show window \
 
-bindsym $mod+F9 exec bash ~/Repositories/rofi-usb-mount/rofi-usb-mount.sh
+# bindsym $mod+F9 exec bash ~/Repositories/rofi-usb-mount/rofi-usb-mount.sh
+bindsym $mod+F9 exec UDISKIE_DMENU_LAUNCHER="rofi" udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select
 
 bindsym $mod+F10 exec rofi -show calc
 
