@@ -267,6 +267,7 @@ assign [class="steam_app_1313140"] $ws6 # Cult of The Lamb
 assign [class="steam_app_548430"] $ws6 # Deep Rock Galactic
 assign [class="steam_app_1604030"] $ws6 # V rising
 assign [class="steam_app_235460"] $ws6 # Metal Gear Rising: Revengence
+assign [class="steam_app_230410"] $ws6 # Warframe
 assign [class="Celeste.bin.x86_64"] $ws6
 assign [class="riotclientux.exe"] $ws6
 assign [class="leagueclientux.exe"] $ws6
