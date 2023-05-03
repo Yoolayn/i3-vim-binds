@@ -193,16 +193,16 @@ mode "workspace" {
 	bindsym l 			workspace 								next
 	bindsym h 			workspace 								prev
 
-	bindsym 1 			workspace $ws1
-	bindsym 2 			workspace $ws2
-	bindsym 3 			workspace $ws3
-	bindsym 4 			workspace $ws4
-	bindsym 5 			workspace $ws5
-	bindsym 6 			workspace $ws6
-	bindsym 7 			workspace $ws7
-	bindsym 8 			workspace $ws8
-	bindsym 9 			workspace $ws9
-	bindsym 0 			workspace $ws10
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
