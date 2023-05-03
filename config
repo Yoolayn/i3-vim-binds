@@ -53,9 +53,11 @@ mode "main" {
 	bindsym n			mode "notify"
 	bindsym w 			mode "workspace"
 	bindsym i			mode "i3"
+	bindsym l			mode "layout"
 	bindsym Shift+$semi	mode ":"
 
-	bindsym Return 		exec alacritty;							mode "default"
+	bindsym BackSpace	mode "default"
+	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
 }
@@ -65,6 +67,7 @@ mode "layout" {
 	bindsym s			layout stacking;						mode "default"
 	bindsym t			layout tabbed;							mode "default"
 
+	bindsym BackSpace	mode "main"
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
@@ -82,6 +85,7 @@ mode "power" {
 	bindsym Shift+s 	exec systemctl poweroff;				mode "default"
 	bindsym l 			exec betterlockscreen -l;				mode "default"
 
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
@@ -91,6 +95,7 @@ mode ":" {
 	bindsym q			mode ":q"
 	bindsym w			mode ":w"
 
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
@@ -99,6 +104,7 @@ mode ":" {
 mode ":q" {
 	bindsym Return		exec systemctl reboot;					mode "default"
 
+	bindsym BackSpace	mode ":"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
 }
@@ -106,6 +112,7 @@ mode ":q" {
 mode ":w" {
 	bindsym Return		exec systemctl hibernate;				mode "default"
 
+	bindsym BackSpace	mode ":"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
 }
@@ -115,6 +122,7 @@ mode "notify" {
 	bindsym c			exec dunstctl close
 	bindsym Shift+c		exec dunstctl close-all
 
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
@@ -141,6 +149,7 @@ mode "resize" {
 	bindsym f			mode "focus"
 	bindsym w			mode "workspace"
 
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
@@ -157,9 +166,10 @@ mode "move" {
 	bindsym w			mode "workspace"
 	bindsym r			mode "resize"
 
-	bindsym Control+g 	mode "default"
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
+	bindsym Control+g 	mode "default"
 }
 
 mode "workspace" {
@@ -200,6 +210,7 @@ mode "workspace" {
 
 	bindsym t 			exec rofi -show window;					mode "default"
 
+	bindsym BackSpace	mode "main"
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
@@ -216,9 +227,10 @@ mode "focus" {
 	bindsym w			mode "workspace"
 	bindsym r			mode "resize"
 
-	bindsym Control+g 	mode "default"
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
+	bindsym Control+g 	mode "default"
 }
 
 mode "rofi" {
@@ -233,9 +245,10 @@ mode "rofi" {
 	bindsym c 			exec rofi -show calc;					mode "default"
 	bindsym Shift+c 	exec $calendar;							mode "default"
 
-	bindsym Control+g 	mode "default"
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
+	bindsym Control+g 	mode "default"
 }
 
 mode "open" {
@@ -250,8 +263,9 @@ mode "open" {
 	bindsym s 			split h; 								mode "left"
 	bindsym v 			split v; 								mode "bottom"
 
-	bindsym Escape 		mode "default"
+	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
+	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
 }
 
@@ -264,6 +278,7 @@ mode "bottom" {
 
 	bindsym s			split h;								mode "left"
 
+	bindsym BackSpace	mode "main"
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
@@ -278,6 +293,7 @@ mode "left" {
 
 	bindsym	v			split v;								mode "bottom"
 
+	bindsym BackSpace	mode "main"
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
