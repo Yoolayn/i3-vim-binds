@@ -36,6 +36,15 @@ floating_modifier $mod
 # Keybidings: #
 ###############
 
+# Variables:
+set $saved_full			maim "/home/$USER/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
+set $saved_select		maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
+set $copied_full		maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
+set $copied_select		maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
+
+set $udiskie			UDISKIE_DMENU_LAUNCHER="rofi" udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select
+set $calendar			bash ~/.local/share/naivecalendar/naivecalendar.sh
+
 mode "main" {
 	set $power			exec ~/.config/i3/scripts/powermenu
 	set $semi			semicolon
@@ -55,6 +64,7 @@ mode "main" {
 	bindsym h			mode "headp"
 	bindsym i			mode "i3"
 	bindsym l			mode "layout"
+	bindsym s			mode "screenshot"
 	bindsym Shift+$semi	mode ":"
 
 	bindsym BackSpace	mode "default"
@@ -75,8 +85,8 @@ mode "layout" {
 }
 
 mode "i3" {
-	 bindsym r			reload
-	 bindsym Shift+r	restart
+	bindsym r			reload
+	bindsym Shift+r	restart
 }
 
 mode "power" {
@@ -235,12 +245,6 @@ mode "focus" {
 }
 
 mode "rofi" {
-	set $udiskie		UDISKIE_DMENU_LAUNCHER="rofi"\
-						udiskie-dmenu -matching regex -dmenu\
-						-i -no-custom -multi-select
-	set $calendar		bash ~/.local/share/naivecalendar/\
-						naivecalendar.sh
-
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 	bindsym p 			exec $udiskie;							mode "default"
 	bindsym c 			exec rofi -show calc;					mode "default"
@@ -311,6 +315,19 @@ mode "headp" {
 	bindsym Control+g 	mode "default"
 }
 
+mode "screenshot" {
+	bindsym Shift+f		exec $saved_full;						mode "default"
+	bindsym Shift+s		exec $saved_select;						mode "default"
+
+	bindsym f			exec $copied_full;						mode "default"
+	bindsym s			exec $copied_select;					mode "default"
+
+	bindsym BackSpace	mode "main"
+	bindsym Return		mode "default"
+	bindsym Escape		mode "default"
+	bindsym Control+g	mode "default"
+}
+
 # bindsym $mod+space mode "main"
 bindsym Super_R mode "main"
 
@@ -329,14 +346,6 @@ bindsym XF86AudioMute exec pamixer --toggle-mute
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-## Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
-
-## Clipboard Screenshots
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
-bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 
 # btop (like task manager)
 bindsym Control+Mod1+Delete exec "alacritty --class btop,btop -e btop"
