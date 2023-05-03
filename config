@@ -52,6 +52,7 @@ mode "main" {
 	bindsym m 			mode "move"
 	bindsym n			mode "notify"
 	bindsym w 			mode "workspace"
+	bindsym h			mode "headp"
 	bindsym i			mode "i3"
 	bindsym l			mode "layout"
 	bindsym Shift+$semi	mode ":"
@@ -299,6 +300,17 @@ mode "left" {
 	bindsym Control+g 	mode "default"
 }
 
+mode "headp" {
+	bindsym c			exec headp -c;							mode "default"
+	bindsym d			exec headp -d;							mode "default"
+	bindsym k			exec bash ~/.config/polybar/killer.sh;	mode "default"
+
+	bindsym BackSpace	mode "main"
+	bindsym Escape 		mode "default"
+	bindsym Return 		mode "default"
+	bindsym Control+g 	mode "default"
+}
+
 # bindsym $mod+space mode "main"
 bindsym Super_R mode "main"
 
@@ -441,11 +453,6 @@ exec --no-startup-id /sbin/emacs --daemon
 
 # udiskie
 exec --no-startup-id udiskie -A
-
-# headp
-bindsym $mod+F1 exec headp -c
-bindsym $mod+Shift+F1 exec headp -d
-bindsym $mod+Control+F1 exec bash ~/.config/polybar/killer.sh
 
 ###############
 # system tray #
