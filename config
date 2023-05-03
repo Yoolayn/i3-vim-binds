@@ -247,36 +247,36 @@ mode "open" {
 
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 
-	bindsym s 			split h; 								mode "horizontal"
-	bindsym v 			split v; 								mode "vertical"
+	bindsym s 			split h; 								mode "left"
+	bindsym v 			split v; 								mode "bottom"
 
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
 }
 
-mode "vertical" {
+mode "bottom" {
 	bindsym w 			exec /usr/bin/firefox;					mode "default"
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	mode "default"
 	bindsym t 			exec alacritty; mode "default";			mode "default"
 
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 
-	bindsym s			split h;								mode "horizontal"
+	bindsym s			split h;								mode "left"
 
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
 }
 
-mode "horizontal" {
+mode "left" {
 	bindsym w 			exec /usr/bin/firefox;					mode "default"
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	mode "default"
 	bindsym t 			exec alacritty; mode "default";			mode "default"
 
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 
-	bindsym	v			split v;								mode "vertical"
+	bindsym	v			split v;								mode "bottom"
 
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
