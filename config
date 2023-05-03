@@ -81,7 +81,7 @@ mode "i3" {
 mode "power" {
 	bindsym s 			exec systemctl suspend;					mode "default"
 	bindsym h 			exec systemctl hibernate;				mode "default"
-	bindsym r 			exec systemctl reboot;					mode "default"
+	bindsym Shift+r 	exec systemctl reboot;					mode "default"
 	bindsym Shift+s 	exec systemctl poweroff;				mode "default"
 	bindsym l 			exec betterlockscreen -l;				mode "default"
 
