@@ -37,6 +37,8 @@ floating_modifier $mod
 ###############
 
 # Variables:
+set $center				move position center
+
 set $saved_full			maim "/home/$USER/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
 set $saved_select		maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
 set $copied_full		maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
@@ -46,11 +48,10 @@ set $udiskie			UDISKIE_DMENU_LAUNCHER="rofi" udiskie-dmenu -matching regex -dmen
 set $calendar			bash ~/.local/share/naivecalendar/naivecalendar.sh
 
 mode "main" {
-	set $power			exec ~/.config/i3/scripts/powermenu
 	set $semi			semicolon
 
 	bindsym Shift+c 	kill;									mode "default"
-	bindsym e 			$power;									mode "default"
+	bindsym e 			exec ~/.config/i3/scripts/powermenu;	mode "default"
 	bindsym space		floating toggle; $center;				mode "default"
 	bindsym	Shift+f		fullscreen toggle;						mode "default"
 
