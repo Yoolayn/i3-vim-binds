@@ -65,6 +65,7 @@ mode "main" {
 	bindsym i			mode "i3"
 	bindsym l			mode "layout"
 	bindsym s			mode "screenshot"
+	bindsym b			mode "buffer"
 	bindsym Shift+$semi	mode ":"
 
 	bindsym Shift+c 	kill;									mode "default"
@@ -73,6 +74,18 @@ mode "main" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
+}
+
+mode "buffer" {
+	bindsym k			kill;									mode "default"
+	bindsym b 			exec rofi -show window;					mode "default"
+
+	bindsym BackSpace	mode "default"
+	bindsym Return 		mode "default"
+	bindsym Escape 		mode "default"
+	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "layout" {
@@ -84,6 +97,7 @@ mode "layout" {
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "i3" {
@@ -94,6 +108,7 @@ mode "i3" {
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "power" {
@@ -107,6 +122,7 @@ mode "power" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode ":" {
@@ -117,6 +133,7 @@ mode ":" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode ":q" {
@@ -125,6 +142,7 @@ mode ":q" {
 	bindsym BackSpace	mode ":"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode ":w" {
@@ -133,6 +151,7 @@ mode ":w" {
 	bindsym BackSpace	mode ":"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "notify" {
@@ -144,6 +163,7 @@ mode "notify" {
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "resize" {
@@ -173,6 +193,7 @@ mode "resize" {
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "move" {
@@ -192,6 +213,7 @@ mode "move" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "workspace" {
@@ -238,6 +260,7 @@ mode "workspace" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "focus" {
@@ -257,6 +280,7 @@ mode "focus" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "rofi" {
@@ -269,6 +293,7 @@ mode "rofi" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "open" {
@@ -289,6 +314,7 @@ mode "open" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "bottom" {
@@ -306,6 +332,7 @@ mode "bottom" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "right" {
@@ -323,6 +350,7 @@ mode "right" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "headp" {
@@ -335,6 +363,7 @@ mode "headp" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 mode "screenshot" {
@@ -348,6 +377,7 @@ mode "screenshot" {
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
+	bindsym Super_R		mode "default"
 }
 
 # bindsym $mod+space mode "main"
