@@ -50,7 +50,6 @@ set $calendar			bash ~/.local/share/naivecalendar/naivecalendar.sh
 mode "main" {
 	set $semi			semicolon
 
-	bindsym Shift+c 	kill;									mode "default"
 	bindsym e 			exec ~/.config/i3/scripts/powermenu;	mode "default"
 	bindsym space		floating toggle; $center;				mode "default"
 	bindsym	Shift+f		fullscreen toggle;						mode "default"
@@ -67,6 +66,8 @@ mode "main" {
 	bindsym l			mode "layout"
 	bindsym s			mode "screenshot"
 	bindsym Shift+$semi	mode ":"
+
+	bindsym Shift+c 	kill;									mode "default"
 
 	bindsym BackSpace	mode "default"
 	bindsym Return 		mode "default"
@@ -87,7 +88,12 @@ mode "layout" {
 
 mode "i3" {
 	bindsym r			reload
-	bindsym Shift+r	restart
+	bindsym Shift+r		restart
+
+	bindsym BackSpace	mode "main"
+	bindsym Return		mode "default"
+	bindsym Escape		mode "default"
+	bindsym Control+g	mode "default"
 }
 
 mode "power" {
@@ -161,6 +167,8 @@ mode "resize" {
 	bindsym f			mode "focus"
 	bindsym w			mode "workspace"
 
+	bindsym Shift+c 	kill
+
 	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
@@ -177,6 +185,8 @@ mode "move" {
 	bindsym f			mode "focus"
 	bindsym w			mode "workspace"
 	bindsym r			mode "resize"
+
+	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
@@ -222,6 +232,8 @@ mode "workspace" {
 
 	bindsym t 			exec rofi -show window;					mode "default"
 
+	bindsym Shift+c 	kill
+
 	bindsym BackSpace	mode "main"
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
@@ -238,6 +250,8 @@ mode "focus" {
 	bindsym m			mode "move"
 	bindsym w			mode "workspace"
 	bindsym r			mode "resize"
+
+	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
@@ -269,6 +283,8 @@ mode "open" {
 	bindsym s 			split h; 								mode "left"
 	bindsym v 			split v; 								mode "bottom"
 
+	bindsym Shift+c 	kill;									mode "default"
+
 	bindsym BackSpace	mode "main"
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
@@ -284,6 +300,8 @@ mode "bottom" {
 
 	bindsym s			split h;								mode "left"
 
+	bindsym Shift+c 	kill;									mode "default"
+
 	bindsym BackSpace	mode "main"
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
@@ -298,6 +316,8 @@ mode "left" {
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 
 	bindsym	v			split v;								mode "bottom"
+
+	bindsym Shift+c 	kill;									mode "default"
 
 	bindsym BackSpace	mode "main"
 	bindsym Escape 		mode "default"
