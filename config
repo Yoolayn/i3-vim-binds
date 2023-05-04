@@ -280,7 +280,7 @@ mode "open" {
 
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 
-	bindsym s 			split h; 								mode "left"
+	bindsym s 			split h; 								mode "right"
 	bindsym v 			split v; 								mode "bottom"
 
 	bindsym Shift+c 	kill;									mode "default"
@@ -298,7 +298,7 @@ mode "bottom" {
 
 	bindsym d			exec rofi -modi drun -show drun;		mode "default"
 
-	bindsym s			split h;								mode "left"
+	bindsym s			split h;								mode "right"
 
 	bindsym Shift+c 	kill;									mode "default"
 
@@ -308,7 +308,7 @@ mode "bottom" {
 	bindsym Control+g 	mode "default"
 }
 
-mode "left" {
+mode "right" {
 	bindsym w 			exec /usr/bin/firefox;					mode "default"
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	mode "default"
 	bindsym t 			exec alacritty; mode "default";			mode "default"
