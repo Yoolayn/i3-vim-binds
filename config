@@ -53,6 +53,7 @@ set $!close				mode "default";
 # Misc:
 set $udiskie			UDISKIE_DMENU_LAUNCHER="rofi" udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select
 set $calendar			bash ~/.local/share/naivecalendar/naivecalendar.sh
+set $emacs_daemon		$HOME/.config/i3/scripts/emacs-daemon.sh
 
 
 ##############
@@ -314,6 +315,7 @@ mode "focus" {
 	bindsym j 			focus down
 	bindsym k 			focus up
 	bindsym l 			focus right
+	bindsym f			fullscreen toggle
 
 	bindsym o 			mode "open"
 	bindsym m			mode "move"
@@ -345,6 +347,7 @@ mode "rofi" {
 mode "open" {
 	bindsym w 			exec /usr/bin/firefox;					$!close
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
+	bindsym Shift+e		exec bash $emacs_daemon;				$!close
 	bindsym t 			exec alacritty;							$!close
 
 	bindsym r			mode "rofi"
