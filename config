@@ -35,42 +35,48 @@ set $saved_select		maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%
 set $copied_full		maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 set $copied_select		maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 
-#XF86 buttons:
-set $incvol				XF86AudioRaiseVolume
-set $decvol				XF86AudioLowerVolume
-set $mute				XF86AudioMute
-set $next				XF86AudioNext
-set $prev				XF86AudioPrev
-set $play				XF86AudioPlay
+# XF86 buttons:
+set $Xincvol			XF86AudioRaiseVolume
+set $Xdecvol			XF86AudioLowerVolume
+set $Xmute				XF86AudioMute
+set $Xnext				XF86AudioNext
+set $Xprev				XF86AudioPrev
+set $Xplay				XF86AudioPlay
+set $Xplayer			ffplay -nodisp -autoexit
 
+# Macros:
+set $!exec				exec --no-startup-id
+set $!exec_always		exec_always --no-startup-id
+set $!start				mode "main";
+set $!close				mode "default";
+
+# Misc:
 set $udiskie			UDISKIE_DMENU_LAUNCHER="rofi" udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select
 set $calendar			bash ~/.local/share/naivecalendar/naivecalendar.sh
 
-set $exec				exec --no-startup-id
-set $exec_always		exec_always --no-startup-id
 
 ##############
 # Keybidings #
 ##############
 
 # control i3
-bindsym $super			mode "main"
+bindsym $super			$!start
 
 # volume
-bindsym $incvol			exec pamixer -i 5
-bindsym $decvol			exec pamixer -d 5
+bindsym $Xincvol		exec pamixer -i 5
+bindsym $Xdecvol		exec pamixer -d 5
 
 # gradular volume control
-bindsym Shift+$incvol	exec pamixer -i 1
-bindsym Shift+$decvol	exec pamixer -d 1
+bindsym Shift+$Xincvol	exec pamixer -i 1
+bindsym Shift+$Xdecvol	exec pamixer -d 1
 
 # mute
-bindsym $mute			exec pamixer --toggle-mute
+bindsym $Xmute			exec pamixer --toggle-mute
 
 # audio control
-bindsym $play			exec playerctl play-pause
-bindsym $next			exec playerctl next
-bindsym $prev			exec playerctl previous
+bindsym $Xplay			exec playerctl play-pause
+bindsym $Xnext			exec playerctl next
+bindsym $Xprev			exec playerctl previous
 
 # btop (like task manager)
 bindsym $manager		exec "alacritty --class btop,btop -e btop"
@@ -78,9 +84,9 @@ bindsym $manager		exec "alacritty --class btop,btop -e btop"
 mode "main" {
 	set $semi			semicolon
 
-	bindsym e 			exec ~/.config/i3/scripts/powermenu;	mode "default"
-	bindsym space		floating toggle; $center;				mode "default"
-	bindsym	Shift+f		fullscreen toggle;						mode "default"
+	bindsym e 			exec ~/.config/i3/scripts/powermenu;	$!close
+	bindsym space		floating toggle; $center;				$!close
+	bindsym	Shift+f		fullscreen toggle;						$!close
 
 	bindsym p 			mode "power"
 	bindsym o 			mode "open"
@@ -96,36 +102,36 @@ mode "main" {
 	bindsym b			mode "buffer"
 	bindsym Shift+$semi	mode ":"
 
-	bindsym Shift+c 	kill;									mode "default"
+	bindsym Shift+c 	kill;									$!close
 
-	bindsym BackSpace	mode "default"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym BackSpace	$!close
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "buffer" {
-	bindsym k			kill;									mode "default"
-	bindsym b 			exec rofi -show window;					mode "default"
+	bindsym k			kill;									$!close
+	bindsym b 			exec rofi -show window;					$!close
 
-	bindsym BackSpace	mode "default"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym BackSpace	$!close
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "layout" {
-	bindsym d			layout default;							mode "default"
-	bindsym s			layout stacking;						mode "default"
-	bindsym t			layout tabbed;							mode "default"
+	bindsym d			layout default;							$!close
+	bindsym s			layout stacking;						$!close
+	bindsym t			layout tabbed;							$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Return		mode "default"
-	bindsym Escape		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return		$!close
+	bindsym Escape		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 mode "i3" {
@@ -133,24 +139,24 @@ mode "i3" {
 	bindsym Shift+r		restart
 
 	bindsym BackSpace	mode "main"
-	bindsym Return		mode "default"
-	bindsym Escape		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return		$!close
+	bindsym Escape		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 mode "power" {
-	bindsym s 			exec systemctl suspend;					mode "default"
-	bindsym Shift+h 	exec systemctl hibernate;				mode "default"
-	bindsym Shift+r 	exec systemctl reboot;					mode "default"
-	bindsym Shift+s 	exec systemctl poweroff;				mode "default"
-	bindsym l 			exec betterlockscreen -l;				mode "default"
+	bindsym s 			exec systemctl suspend;					$!close
+	bindsym Shift+h 	exec systemctl hibernate;				$!close
+	bindsym Shift+r 	exec systemctl reboot;					$!close
+	bindsym Shift+s 	exec systemctl poweroff;				$!close
+	bindsym l 			exec betterlockscreen -l;				$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 mode ":" {
@@ -158,28 +164,28 @@ mode ":" {
 	bindsym w			mode ":w"
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 mode ":q" {
-	bindsym Return		exec systemctl reboot;					mode "default"
+	bindsym Return		exec systemctl reboot;					$!close
 
 	bindsym BackSpace	mode ":"
-	bindsym Escape 		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Escape 		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 mode ":w" {
-	bindsym Return		exec systemctl hibernate;				mode "default"
+	bindsym Return		exec systemctl hibernate;				$!close
 
 	bindsym BackSpace	mode ":"
-	bindsym Escape 		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Escape 		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 mode "notify" {
@@ -188,10 +194,10 @@ mode "notify" {
 	bindsym Shift+c		exec dunstctl close-all
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-    bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+    bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "resize" {
@@ -218,10 +224,10 @@ mode "resize" {
 	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-    bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+    bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "move" {
@@ -250,10 +256,10 @@ mode "move" {
 	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "workspace" {
@@ -292,15 +298,15 @@ mode "workspace" {
 	bindsym f			mode "focus"
 	bindsym r			mode "resize"
 
-	bindsym t 			exec rofi -show window;					mode "default"
+	bindsym t 			exec rofi -show window;					$!close
 
 	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
-	bindsym Escape 		mode "default"
-	bindsym Return 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Escape 		$!close
+	bindsym Return 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "focus" {
@@ -317,107 +323,107 @@ mode "focus" {
 	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "rofi" {
-	bindsym d			exec rofi -modi drun -show drun;		mode "default"
-	bindsym p 			exec $udiskie;							mode "default"
-	bindsym c 			exec rofi -show calc;					mode "default"
-	bindsym Shift+c 	exec $calendar;							mode "default"
+	bindsym d			exec rofi -modi drun -show drun;		$!close
+	bindsym p 			exec $udiskie;							$!close
+	bindsym c 			exec rofi -show calc;					$!close
+	bindsym Shift+c 	exec $calendar;							$!close
 
 	bindsym BackSpace	mode "open"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "open" {
-	bindsym w 			exec /usr/bin/firefox;					mode "default"
-	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	mode "default"
-	bindsym t 			exec alacritty; mode "default";			mode "default"
+	bindsym w 			exec /usr/bin/firefox;					$!close
+	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
+	bindsym t 			exec alacritty;							$!close
 
 	bindsym r			mode "rofi"
 
-	bindsym d			exec rofi -modi drun -show drun;		mode "default"
+	bindsym d			exec rofi -modi drun -show drun;		$!close
 
 	bindsym s 			split h; 								mode "right"
 	bindsym v 			split v; 								mode "bottom"
 
-	bindsym Shift+c 	kill;									mode "default"
+	bindsym Shift+c 	kill;									$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Return 		mode "default"
-	bindsym Escape 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "bottom" {
-	bindsym w 			exec /usr/bin/firefox;					mode "default"
-	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	mode "default"
-	bindsym t 			exec alacritty; mode "default";			mode "default"
+	bindsym w 			exec /usr/bin/firefox;					$!close
+	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
+	bindsym t 			exec alacritty; 						$!close
 
-	bindsym d			exec rofi -modi drun -show drun;		mode "default"
+	bindsym d			exec rofi -modi drun -show drun;		$!close
 
 	bindsym s			split h;								mode "right"
 
-	bindsym Shift+c 	kill;									mode "default"
+	bindsym Shift+c 	kill;									$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Escape 		mode "default"
-	bindsym Return 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Escape 		$!close
+	bindsym Return 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "right" {
-	bindsym w 			exec /usr/bin/firefox;					mode "default"
-	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	mode "default"
-	bindsym t 			exec alacritty; mode "default";			mode "default"
+	bindsym w 			exec /usr/bin/firefox;					$!close
+	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
+	bindsym t 			exec alacritty;							$!close
 
-	bindsym d			exec rofi -modi drun -show drun;		mode "default"
+	bindsym d			exec rofi -modi drun -show drun;		$!close
 
 	bindsym	v			split v;								mode "bottom"
 
-	bindsym Shift+c 	kill;									mode "default"
+	bindsym Shift+c 	kill;									$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Escape 		mode "default"
-	bindsym Return 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Escape 		$!close
+	bindsym Return 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "headp" {
-	bindsym c			exec headp -c;							mode "default"
-	bindsym d			exec headp -d;							mode "default"
-	bindsym u			exec headp -u 0;						mode "default"
-	bindsym k			exec bash ~/.config/polybar/killer.sh;	mode "default"
+	bindsym c			exec headp -c;							$!close
+	bindsym d			exec headp -d;							$!close
+	bindsym u			exec headp -u 0;						$!close
+	bindsym k			exec bash ~/.config/polybar/killer.sh;	$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Escape 		mode "default"
-	bindsym Return 		mode "default"
-	bindsym Control+g 	mode "default"
-	bindsym $super		mode "default"
+	bindsym Escape 		$!close
+	bindsym Return 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
 }
 
 mode "screenshot" {
-	bindsym Shift+f		exec $saved_full;						mode "default"
-	bindsym Shift+s		exec $saved_select;						mode "default"
+	bindsym Shift+f		exec $saved_full;						$!close
+	bindsym Shift+s		exec $saved_select;						$!close
 
-	bindsym f			exec $copied_full;						mode "default"
-	bindsym s			exec $copied_select;					mode "default"
+	bindsym f			exec $copied_full;						$!close
+	bindsym s			exec $copied_select;					$!close
 
 	bindsym BackSpace	mode "main"
-	bindsym Return		mode "default"
-	bindsym Escape		mode "default"
-	bindsym Control+g	mode "default"
-	bindsym $super		mode "default"
+	bindsym Return		$!close
+	bindsym Escape		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
 }
 
 
@@ -518,27 +524,28 @@ for_window 				[class="Pavucontrol"] 					floating enable
 ##############
 # compositor #
 ##############
+
 # picom:
-$exec_always			picom --config  ~/.config/picom.conf
+$!exec_always			picom --config  ~/.config/picom.conf
 
 #############################################
 # autostart applications/services on login: #
 #############################################
 
-$exec					rofi-polkit-agent
-$exec					numlockx on
-$exec					sleep 1 && feh --bg-fill --no-fehbg --randomize $HOME/Pictures/wallpapers/distrotube-wallpapers
-$exec					dunst
-$exec					/sbin/emacs --daemon
-$exec					udiskie -A
-$exec_always			$HOME/.config/polybar/launch.sh
+$!exec					rofi-polkit-agent
+$!exec					numlockx on
+$!exec					sleep 1 && feh --bg-fill --no-fehbg --randomize $HOME/Pictures/wallpapers/distrotube-wallpapers
+$!exec					dunst
+$!exec					/sbin/emacs --daemon
+$!exec					udiskie -A
+$!exec_always			$HOME/.config/polybar/launch.sh
 
 ###############
 # system tray #
 ###############
 
-$exec					nm-applet
-$exec					alarm-clock-applet
+$!exec					nm-applet
+$!exec					alarm-clock-applet
 
 
 ##############################
