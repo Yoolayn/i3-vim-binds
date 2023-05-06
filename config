@@ -1,51 +1,79 @@
-#######################
-# config starts here: #
-#######################
+############
+# Settings #
+############
 
 font pango: Noto Sans Regular 10
 
-# set the mod key to the winkey:
-set $mod Mod4
+workspace_layout		default
+
+default_border			pixel 4
+smart_borders 			on
+
+hide_edge_borders		both
+gaps 					inner 12
+gaps 					outer 0
+
+floating_modifier 		$mod
 
 #####################
-# workspace layout: #
+# Keybind interface #
 #####################
 
-# default i3 tiling mode:
-workspace_layout default
+set $mod 				Mod4
+set $super 				Super_R
+set $manager			Control+Mod1+Delete
 
-##############################
-# extra options for windows: #
-##############################
+#############
+# Variables #
+#############
 
-#border indicator on windows:
-default_border pixel 4
-smart_borders on
-# border_radius 10
-
-hide_edge_borders both
-
-# Set inner/outer gaps
-gaps inner 12
-gaps outer 0
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-###############
-# Keybidings: #
-###############
-
-# Variables:
 set $center				move position center
 
+# Screenshots:
 set $saved_full			maim "/home/$USER/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
 set $saved_select		maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
 set $copied_full		maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 set $copied_select		maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 
+#XF86 buttons:
+set $incvol				XF86AudioRaiseVolume
+set $decvol				XF86AudioLowerVolume
+set $mute				XF86AudioMute
+set $next				XF86AudioNext
+set $prev				XF86AudioPrev
+set $play				XF86AudioPlay
+
 set $udiskie			UDISKIE_DMENU_LAUNCHER="rofi" udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select
 set $calendar			bash ~/.local/share/naivecalendar/naivecalendar.sh
+
+set $exec				exec --no-startup-id
+set $exec_always		exec_always --no-startup-id
+
+##############
+# Keybidings #
+##############
+
+# control i3
+bindsym $super			mode "main"
+
+# volume
+bindsym $incvol			exec pamixer -i 5
+bindsym $decvol			exec pamixer -d 5
+
+# gradular volume control
+bindsym Shift+$incvol	exec pamixer -i 1
+bindsym Shift+$decvol	exec pamixer -d 1
+
+# mute
+bindsym $mute			exec pamixer --toggle-mute
+
+# audio control
+bindsym $play			exec playerctl play-pause
+bindsym $next			exec playerctl next
+bindsym $prev			exec playerctl previous
+
+# btop (like task manager)
+bindsym $manager		exec "alacritty --class btop,btop -e btop"
 
 mode "main" {
 	set $semi			semicolon
@@ -74,7 +102,7 @@ mode "main" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "buffer" {
@@ -85,7 +113,7 @@ mode "buffer" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "layout" {
@@ -97,7 +125,7 @@ mode "layout" {
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "i3" {
@@ -108,7 +136,7 @@ mode "i3" {
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "power" {
@@ -122,7 +150,7 @@ mode "power" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode ":" {
@@ -133,7 +161,7 @@ mode ":" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode ":q" {
@@ -142,7 +170,7 @@ mode ":q" {
 	bindsym BackSpace	mode ":"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode ":w" {
@@ -151,7 +179,7 @@ mode ":w" {
 	bindsym BackSpace	mode ":"
 	bindsym Escape 		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "notify" {
@@ -163,7 +191,7 @@ mode "notify" {
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "resize" {
@@ -193,7 +221,7 @@ mode "resize" {
 	bindsym Return 		mode "default"
     bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "move" {
@@ -201,6 +229,18 @@ mode "move" {
 	bindsym j 			move down
 	bindsym k 			move up
 	bindsym l 			move right
+
+	bindsym Shift+h 	move left 1
+	bindsym Shift+j 	move down 1
+	bindsym Shift+k 	move up 1
+	bindsym Shift+l 	move right 1
+
+	bindsym Control+h 	move left 100
+	bindsym Control+j 	move down 100
+	bindsym Control+k 	move up 100
+	bindsym Control+l 	move right 100
+
+	bindsym c			move position center
 
 	bindsym o			mode "open"
 	bindsym f			mode "focus"
@@ -213,7 +253,7 @@ mode "move" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "workspace" {
@@ -260,7 +300,7 @@ mode "workspace" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "focus" {
@@ -280,7 +320,7 @@ mode "focus" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "rofi" {
@@ -293,7 +333,7 @@ mode "rofi" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "open" {
@@ -314,7 +354,7 @@ mode "open" {
 	bindsym Return 		mode "default"
 	bindsym Escape 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "bottom" {
@@ -332,7 +372,7 @@ mode "bottom" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "right" {
@@ -350,7 +390,7 @@ mode "right" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "headp" {
@@ -363,7 +403,7 @@ mode "headp" {
 	bindsym Escape 		mode "default"
 	bindsym Return 		mode "default"
 	bindsym Control+g 	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
 mode "screenshot" {
@@ -377,192 +417,136 @@ mode "screenshot" {
 	bindsym Return		mode "default"
 	bindsym Escape		mode "default"
 	bindsym Control+g	mode "default"
-	bindsym Super_R		mode "default"
+	bindsym $super		mode "default"
 }
 
-# bindsym $mod+space mode "main"
-bindsym Super_R mode "main"
 
-# volume
-bindsym XF86AudioRaiseVolume exec pamixer -i 5
-bindsym XF86AudioLowerVolume exec pamixer -d 5
+###################
+# workspace names #
+###################
 
-# gradular volume control
-bindsym Shift+XF86AudioRaiseVolume exec pamixer -i 1
-bindsym Shift+XF86AudioLowerVolume exec pamixer -d 1
+set						$ws1 "1"
+set						$ws2 "2"
+set						$ws3 "3"
+set						$ws4 "4"
+set						$ws5 "5"
+set						$ws6 "6"
+set						$ws7 "7"
+set						$ws8 "8"
+set						$ws9 "9"
+set						$ws10 "10"
 
-# mute
-bindsym XF86AudioMute exec pamixer --toggle-mute
+########################
+# workspace assignment #
+########################
 
-# audio control
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+assign 					[class="Alacritty"] 					$ws1
+assign 					[class="(?i)firefox"] 					$ws2
+assign 					[class="Thunar"] 						$ws3
+assign 					[class="Emacs"] 						$ws3
+assign 					[class="steam"] 						$ws4
+assign 					[class="lutris"] 						$ws4
+assign 					[class="discord"] 						$ws5
+assign 					[class="WebCord"] 						$ws5
+assign 					[class="factorio"] 						$ws6
+assign 					[class="hl_linux"] 						$ws6
+assign 					[class="hl2_linux"] 					$ws6
+assign 					[class="FTL.amd64"] 					$ws6
+assign 					[class="KSP.x86_64"] 					$ws6
+assign 					[class="minecraft-launcher"] 			$ws6
+assign 					[class="Minecraft Launcher"] 			$ws6
+assign 					[class="ftb-app"] 						$ws6
+assign 					[class="Minecraft"] 					$ws6
+assign 					[class="Poly Bridge 2.x86_64"] 			$ws6
+assign 					[class="Starsector 0.95.1a-RC6"] 		$ws6
+assign 					[class="steam_app_311340"] 				$ws6 	# Metal gear solid 5 Ground Zeroes
+assign 					[class="steam_app_287700"] 				$ws6 	# Metal gear solid 5 Phantom Pain
+assign 					[class="steam_app_1328670"] 			$ws6 	# Mass Effect Legendary Edition
+assign 					[class="steam_app_1182480"] 			$ws6 	# EA desktop
+assign 					[class="steam_app_1366540"] 			$ws6 	# Dyson Sphere Program
+assign 					[class="steam_app_954850"] 				$ws6 	# KSP 2
+assign 					[class="steam_app_606280"] 				$ws6 	# darksiders 3
+assign 					[class="steam_app_1313140"] 			$ws6 	# Cult of The Lamb
+assign 					[class="steam_app_548430"] 				$ws6 	# Deep Rock Galactic
+assign 					[class="steam_app_1604030"] 			$ws6 	# V rising
+assign 					[class="steam_app_235460"] 				$ws6 	# Metal Gear Rising: Revengence
+assign 					[class="steam_app_230410"] 				$ws6	# Warframe
+assign 					[class="steam_app_1172470"] 			$ws6	# Apex Legends
+assign 					[class="steam_app_714070"] 				$ws6	# Entropy: Zero
+assign 					[class="Celeste.bin.x86_64"] 			$ws6
+assign 					[class="riotclientux.exe"] 				$ws6
+assign 					[class="leagueclientux.exe"] 			$ws6
+assign 					[class="league of legends.exe"] 		$ws6
+assign 					[class="Beyond-All-Reason"] 			$ws6
+assign 					[class="gw2-64.exe"] 					$ws6
+assign 					[class="battle.net.exe"] 				$ws6
+assign 					[class="sc2_x64.exe"] 					$ws6
+assign 					[class="portal2_linux"] 				$ws6
+assign 					[class="bms_linux"] 					$ws6
+assign 					[class="elisa"] 						$ws7
+assign 					[class="vlc"] 							$ws7
+assign 					[class="YouTube Music"] 				$ws7
+assign 					[class="Rhythmbox"] 					$ws7
+assign 					[class="Microsoft Teams - Preview"] 	$ws8
 
-# btop (like task manager)
-bindsym Control+Mod1+Delete exec "alacritty --class btop,btop -e btop"
+###############
+# focus rules #
+###############
 
-######################################################
-# configuration for workspace behaviour and windows: #
-######################################################
+for_window 				[class=Alacritty] 						focus
+for_window 				[class=(?i)firefox] 					focus
+for_window 				[class=Thunar] 							focus
+for_window 				[class=elisa] 							focus
+for_window 				[class=vlc] 							focus
+for_window 				[class=factorio] 						focus
+for_window 				[class=hl_linux] 						focus
+for_window 				[class=hl2_linux] 						focus
+for_window 				[class=FTL.amd64] 						focus
+for_window 				[class=KSP.x86_64] 						focus
+for_window 				[class=Rhythmbox] 						focus
+for_window 				[class=Emacs] 							focus
 
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+##################
+# floating rules #
+##################
 
-# bind program to workspace and focus to them on startup:
-assign [class="Alacritty"] $ws1
-assign [class="(?i)firefox"] $ws2
-assign [class="Thunar"] $ws3
-assign [class="Emacs"] $ws3
-assign [class="steam"] $ws4
-assign [class="lutris"] $ws4
-assign [class="discord"] $ws5
-assign [class="WebCord"] $ws5
-assign [class="factorio"] $ws6
-assign [class="hl_linux"] $ws6
-assign [class="hl2_linux"] $ws6
-assign [class="FTL.amd64"] $ws6
-assign [class="KSP.x86_64"] $ws6
-assign [class="minecraft-launcher"] $ws6
-assign [class="Minecraft Launcher"] $ws6
-assign [class="ftb-app"] $ws6
-assign [class="Minecraft"] $ws6
-assign [class="Poly Bridge 2.x86_64"] $ws6
-assign [class="Starsector 0.95.1a-RC6"] $ws6
-assign [class="steam_app_311340"] $ws6 							# Metal gear solid 5 Ground Zeroes
-assign [class="steam_app_287700"] $ws6 							# Metal gear solid 5 Phantom Pain
-assign [class="steam_app_1328670"] $ws6 						# Mass Effect Legendary Edition
-assign [class="steam_app_1182480"] $ws6 						# EA desktop
-assign [class="steam_app_1366540"] $ws6 						# Dyson Sphere Program
-assign [class="steam_app_954850"] $ws6 							# KSP 2
-assign [class="steam_app_606280"] $ws6 							# darksiders 3
-assign [class="steam_app_1313140"] $ws6 						# Cult of The Lamb
-assign [class="steam_app_548430"] $ws6 							# Deep Rock Galactic
-assign [class="steam_app_1604030"] $ws6 						# V rising
-assign [class="steam_app_235460"] $ws6 							# Metal Gear Rising: Revengence
-assign [class="steam_app_230410"] $ws6 							# Warframe
-assign [class="steam_app_1172470"] $ws6 						# Apex Legends
-assign [class="steam_app_714070"] $ws6 							# Entropy: Zero
-assign [class="Celeste.bin.x86_64"] $ws6
-assign [class="riotclientux.exe"] $ws6
-assign [class="leagueclientux.exe"] $ws6
-assign [class="league of legends.exe"] $ws6
-assign [class="Beyond-All-Reason"] $ws6
-assign [class="gw2-64.exe"] $ws6
-assign [class="battle.net.exe"] $ws6
-assign [class="sc2_x64.exe"] $ws6
-assign [class="portal2_linux"] $ws6
-assign [class="bms_linux"] $ws6
-assign [class="elisa"] $ws7
-assign [class="vlc"] $ws7
-assign [class="YouTube Music"] $ws7
-assign [class="Rhythmbox"] $ws7
-assign [class="Microsoft Teams - Preview"] $ws8
-
-# automatic set focus new window if it opens on another workspace than the current:
-for_window [class=Alacritty] focus
-for_window [class=(?i)firefox] focus
-for_window [class=Thunar] focus
-for_window [class=elisa] focus
-for_window [class=vlc] focus
-for_window [class=factorio] focus
-for_window [class=hl_linux] focus
-for_window [class=hl2_linux] focus
-for_window [class=FTL.amd64] focus
-for_window [class=KSP.x86_64] focus
-for_window [class=Rhythmbox] focus
-for_window [class=Emacs] focus
-
-# Btop
-for_window [class=btop] floating enable
-for_window [class=btop] resize set 1280 730
-for_window [class=btop] move position center
+for_window 				[class=btop] 							floating enable
+for_window 				[class=btop] 							resize set 1280 730
+for_window 				[class=btop] 							move position center
+for_window 				[class="Pavucontrol"] 					floating enable
 
 ##############
 # compositor #
 ##############
-
 # picom:
-exec_always --no-startup-id picom --config  ~/.config/picom.conf
+$exec_always			picom --config  ~/.config/picom.conf
 
 #############################################
 # autostart applications/services on login: #
 #############################################
 
-# rofi polkit
-exec --no-startup-id rofi-polkit-agent
-
-# num lock activated
-exec --no-startup-id numlockx on
-
-# set wallpaper
-exec --no-startup-id sleep 1 && feh --bg-fill --no-fehbg --randomize $HOME/Pictures/wallpapers/distrotube-wallpapers
-
-# Desktop notifications
-exec --no-startup-id dunst
-
-# Emacs daemon
-exec --no-startup-id /sbin/emacs --daemon
-
-# udiskie
-exec --no-startup-id udiskie -A
+$exec					rofi-polkit-agent
+$exec					numlockx on
+$exec					sleep 1 && feh --bg-fill --no-fehbg --randomize $HOME/Pictures/wallpapers/distrotube-wallpapers
+$exec					dunst
+$exec					/sbin/emacs --daemon
+$exec					udiskie -A
+$exec_always			$HOME/.config/polybar/launch.sh
 
 ###############
 # system tray #
 ###############
-exec --no-startup-id nm-applet
-exec --no-startup-id alarm-clock-applet
 
-##################
-# floating rules #
-##################
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+$exec					nm-applet
+$exec					alarm-clock-applet
 
-######################################
-# color settings for bar and windows #
-######################################
 
-# Define colors variables:
-set $darkbluetrans	        #08052be6
-set $darkblue		        #08052b
-set $lightblue		        #5294e2
-set $urgentred		        #e53935
-set $white		            #ffffff
-set $black		            #000000
-set $purple		            #e345ff
-set $darkpurple             #301934
-set $darkgrey		        #383c4a
-set $grey		            #b0b5bd
-set $mediumgrey		        #8b8b8b
-set $yellowbrown	        #e1b700
-set $fwtxt                  #b315d1
-
-# 3b
-set $brink-pink             #FF6189
-set $independence           #3D425B
-set $ebony-clay             #2b2d3a
-set $middle-blue            #78D6F0
-set $yellow-green-crayola   #AADD77
-set $lavender-floral        #A98AD6
-set $pistachio              #9FD173
-set $gold-metallic          #DBB85E
-# define colors for windows:
-#class		        	    border		bground		text		indicator        child_border
-client.focused		    	$lightblue	$darkblue	$white		#a98ad6          #78d6f0
-client.unfocused	    	$darkblue	$darkblue	$grey		#a98ad6	         #3d425b
-client.focused_inactive		$darkblue	$darkblue	$grey		$black		     #3d425b
-client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	 $yellowbrown
-
-################
-# bar settings #
-################
-
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+##############################
+# color settings for borders #
+##############################
+# define colors for borders:
+#class					border		bground		text		indicator    child_border
+client.focused		    $lightblue	$darkblue	$white		#a98ad6      #78d6f0
+client.unfocused	    $darkblue	$darkblue	$grey		#a98ad6	     #3d425b
+client.focused_inactive	$darkblue	$darkblue	$grey		$black		 #3d425b
+client.urgent		    $urgentred	$urgentred	$white		$yellowbrown $yellowbrown
