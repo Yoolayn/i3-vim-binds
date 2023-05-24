@@ -21,6 +21,7 @@ floating_modifier 		$mod
 
 set $mod 				Mod4
 set $super 				Super_R
+set $super2				Super_L
 set $manager			Control+Mod1+Delete
 
 #############
@@ -30,8 +31,8 @@ set $manager			Control+Mod1+Delete
 set $center				move position center
 
 # Screenshots:
-set $saved_full			maim "/home/$USER/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
-set $saved_select		maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Picture/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
+set $saved_full			maim "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
+set $saved_select		maim --select "/home/$USER/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png" && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d_%H-%M-%S")-screenshot.png"
 set $copied_full		maim | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 set $copied_select		maim --select | xclip -selection clipboard -t image/png && notify-send "Screenshot copied to clipboard"
 
@@ -62,6 +63,7 @@ set $emacs_daemon		$HOME/.config/i3/scripts/emacs-daemon.sh
 
 # control i3
 bindsym $super			$!start
+bindsym $super2			$!start
 
 # volume
 bindsym $Xincvol		exec pamixer -i 5
@@ -81,193 +83,11 @@ bindsym $Xprev			exec playerctl previous
 
 # btop (like task manager)
 bindsym $manager		exec "alacritty --class btop,btop -e btop"
+set $nvim               "alacritty --class nvim,nvim -e nvim"
 
 mode "main" {
-	set $semi			semicolon
-
-	bindsym e 			exec ~/.config/i3/scripts/powermenu;	$!close
-	bindsym space		floating toggle; $center;				$!close
-	bindsym	Shift+f		fullscreen toggle;						$!close
-
-	bindsym p 			mode "power"
-	bindsym o 			mode "open"
-	bindsym r 			mode "resize"
-	bindsym f 			mode "focus"
-	bindsym m 			mode "move"
-	bindsym n			mode "notify"
-	bindsym w 			mode "workspace"
-	bindsym h			mode "headp"
-	bindsym i			mode "i3"
-	bindsym l			mode "layout"
-	bindsym s			mode "screenshot"
-	bindsym b			mode "buffer"
-	bindsym Shift+$semi	mode ":"
-
-	bindsym Shift+c 	kill;									$!close
-
-	bindsym BackSpace	$!close
-	bindsym Return 		$!close
-	bindsym Escape 		$!close
-	bindsym Control+g 	$!close
-	bindsym $super		$!close
-}
-
-mode "buffer" {
-	bindsym k			kill;									$!close
-	bindsym b 			exec rofi -show window;					$!close
-
-	bindsym BackSpace	$!close
-	bindsym Return 		$!close
-	bindsym Escape 		$!close
-	bindsym Control+g 	$!close
-	bindsym $super		$!close
-}
-
-mode "layout" {
-	bindsym d			layout default;							$!close
-	bindsym s			layout stacking;						$!close
-	bindsym t			layout tabbed;							$!close
-
-	bindsym BackSpace	mode "main"
-	bindsym Return		$!close
-	bindsym Escape		$!close
-	bindsym Control+g	$!close
-	bindsym $super		$!close
-}
-
-mode "i3" {
-	bindsym r			reload
-	bindsym Shift+r		restart
-
-	bindsym BackSpace	mode "main"
-	bindsym Return		$!close
-	bindsym Escape		$!close
-	bindsym Control+g	$!close
-	bindsym $super		$!close
-}
-
-mode "power" {
-	bindsym s 			exec systemctl suspend;					$!close
-	bindsym Shift+h 	exec systemctl hibernate;				$!close
-	bindsym Shift+r 	exec systemctl reboot;					$!close
-	bindsym Shift+s 	exec systemctl poweroff;				$!close
-	bindsym l 			exec betterlockscreen -l;				$!close
-
-	bindsym BackSpace	mode "main"
-	bindsym Return 		$!close
-	bindsym Escape 		$!close
-	bindsym Control+g	$!close
-	bindsym $super		$!close
-}
-
-mode ":" {
-	bindsym q			mode ":q"
-	bindsym w			mode ":w"
-
-	bindsym BackSpace	mode "main"
-	bindsym Return 		$!close
-	bindsym Escape 		$!close
-	bindsym Control+g	$!close
-	bindsym $super		$!close
-}
-
-mode ":q" {
-	bindsym Return		exec systemctl reboot;					$!close
-
-	bindsym BackSpace	mode ":"
-	bindsym Escape 		$!close
-	bindsym Control+g	$!close
-	bindsym $super		$!close
-}
-
-mode ":w" {
-	bindsym Return		exec systemctl hibernate;				$!close
-
-	bindsym BackSpace	mode ":"
-	bindsym Escape 		$!close
-	bindsym Control+g	$!close
-	bindsym $super		$!close
-}
-
-mode "notify" {
-	bindsym o			exec dunstctl history-pop
-	bindsym c			exec dunstctl close
-	bindsym Shift+c		exec dunstctl close-all
-
-	bindsym BackSpace	mode "main"
-	bindsym Return 		$!close
-    bindsym Escape 		$!close
-	bindsym Control+g 	$!close
-	bindsym $super		$!close
-}
-
-mode "resize" {
-	bindsym h 			resize shrink 							width 	10 px
-	bindsym j 			resize grow 							height	10 px
-	bindsym k 			resize shrink 							height 	10 px
-	bindsym l 			resize grow 							width	10 px
-
-	bindsym Shift+h 	resize shrink 							width 	1 px
-	bindsym Shift+j 	resize grow 							height	1 px
-	bindsym Shift+k 	resize shrink 							height 	1 px
-	bindsym Shift+l 	resize grow 							width 	1 px
-
-	bindsym Control+h 	resize shrink 							width 	50 px
-	bindsym Control+j 	resize grow 							height	50 px
-	bindsym Control+k 	resize shrink 							height 	50 px
-	bindsym Control+l 	resize grow 							width 	50 px
-
-	bindsym o			mode "open"
-	bindsym m			mode "move"
-	bindsym f			mode "focus"
-	bindsym w			mode "workspace"
-
-	bindsym Shift+c 	kill
-
-	bindsym BackSpace	mode "main"
-	bindsym Return 		$!close
-    bindsym Escape 		$!close
-	bindsym Control+g 	$!close
-	bindsym $super		$!close
-}
-
-mode "move" {
-	bindsym h 			move left
-	bindsym j 			move down
-	bindsym k 			move up
-	bindsym l 			move right
-
-	bindsym Shift+h 	move left 1
-	bindsym Shift+j 	move down 1
-	bindsym Shift+k 	move up 1
-	bindsym Shift+l 	move right 1
-
-	bindsym Control+h 	move left 100
-	bindsym Control+j 	move down 100
-	bindsym Control+k 	move up 100
-	bindsym Control+l 	move right 100
-
-	bindsym c			move position center
-
-	bindsym o			mode "open"
-	bindsym f			mode "focus"
-	bindsym w			mode "workspace"
-	bindsym r			mode "resize"
-
-	bindsym Shift+c 	kill
-
-	bindsym BackSpace	mode "main"
-	bindsym Return 		$!close
-	bindsym Escape 		$!close
-	bindsym Control+g 	$!close
-	bindsym $super		$!close
-}
-
-mode "workspace" {
 	set $mv 			move container to workspace
-
-	bindsym Tab 		workspace 								next
-	bindsym Shift+Tab 	workspace 								prev
+    set $semi			semicolon
 
 	bindsym l 			workspace 								next
 	bindsym h 			workspace 								prev
@@ -294,23 +114,264 @@ mode "workspace" {
 	bindsym Shift+9 	$mv										$ws9
 	bindsym Shift+0 	$mv										$ws10
 
+    bindsym t 			exec rofi -show window;					$!close
+
+	bindsym space		floating toggle; $center;				$!close
+	bindsym	Shift+f		fullscreen toggle;						$!close
+
+	bindsym p 			mode "power"
+	bindsym o 			mode "open"
+	bindsym r 			mode "resize"
+	bindsym f 			mode "focus"
+	bindsym m 			mode "move"
+	bindsym n			mode "notify"
+	bindsym h			mode "headp"
+	bindsym i			mode "i3"
+	bindsym w			mode "layout"
+	bindsym s			mode "screenshot"
+	bindsym b			mode "buffer"
+
+	bindsym Shift+c 	kill;									$!close
+
+	bindsym BackSpace	$!close
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "buffer" {
+	bindsym k			kill;									$!close
+	bindsym b 			exec rofi -show window;					$!close
+
+	bindsym BackSpace	$!close
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "layout" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym d			layout default;							$!close
+	bindsym s			layout stacking;						$!close
+	bindsym t			layout tabbed;							$!close
+
+	bindsym BackSpace	mode "main"
+	bindsym Return		$!close
+	bindsym Escape		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "i3" {
+	bindsym r			reload
+	bindsym Shift+r		restart
+
+	bindsym BackSpace	mode "main"
+	bindsym Return		$!close
+	bindsym Escape		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "power" {
+	bindsym s 			exec systemctl suspend;					$!close
+	bindsym Shift+h 	exec systemctl hibernate;				$!close
+	bindsym Shift+r 	exec systemctl reboot;					$!close
+	bindsym Shift+s 	exec systemctl poweroff;				$!close
+	bindsym l 			exec betterlockscreen -l;				$!close
+
+	bindsym BackSpace	mode "main"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "notify" {
+	bindsym o			exec dunstctl history-pop
+	bindsym p			exec dunstctl close
+	bindsym c			exec dunstctl close-all
+
+	bindsym BackSpace	mode "main"
+	bindsym Return 		$!close
+    bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "resize" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
+    bindsym t 			exec rofi -show window;					$!close
+
+	bindsym h 			resize shrink 							width 	10 px
+	bindsym j 			resize grow 							height	10 px
+	bindsym k 			resize shrink 							height 	10 px
+	bindsym l 			resize grow 							width	10 px
+
+	bindsym Shift+h 	resize shrink 							width 	1 px
+	bindsym Shift+j 	resize grow 							height	1 px
+	bindsym Shift+k 	resize shrink 							height 	1 px
+	bindsym Shift+l 	resize grow 							width 	1 px
+
+	bindsym Control+h 	resize shrink 							width 	50 px
+	bindsym Control+j 	resize grow 							height	50 px
+	bindsym Control+k 	resize shrink 							height 	50 px
+	bindsym Control+l 	resize grow 							width 	50 px
+
 	bindsym o			mode "open"
 	bindsym m			mode "move"
 	bindsym f			mode "focus"
-	bindsym r			mode "resize"
-
-	bindsym t 			exec rofi -show window;					$!close
 
 	bindsym Shift+c 	kill
 
 	bindsym BackSpace	mode "main"
-	bindsym Escape 		$!close
 	bindsym Return 		$!close
+    bindsym Escape 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
+}
+
+mode "move" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
+    bindsym t 			exec rofi -show window;					$!close
+
+	bindsym h 			move left
+	bindsym j 			move down
+	bindsym k 			move up
+	bindsym l 			move right
+
+	bindsym Shift+h 	move left 1
+	bindsym Shift+j 	move down 1
+	bindsym Shift+k 	move up 1
+	bindsym Shift+l 	move right 1
+
+	bindsym Control+h 	move left 100
+	bindsym Control+j 	move down 100
+	bindsym Control+k 	move up 100
+	bindsym Control+l 	move right 100
+
+	bindsym c			move position center
+
+	bindsym o			mode "open"
+	bindsym f			mode "focus"
+	bindsym r			mode "resize"
+
+	bindsym Shift+c 	kill
+
+	bindsym BackSpace	mode "main"
+	bindsym Return 		$!close
+	bindsym Escape 		$!close
+	bindsym Control+g 	$!close
+	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "focus" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
+    bindsym t 			exec rofi -show window;					$!close
+
 	bindsym h 			focus left
 	bindsym j 			focus down
 	bindsym k 			focus up
@@ -319,7 +380,6 @@ mode "focus" {
 
 	bindsym o 			mode "open"
 	bindsym m			mode "move"
-	bindsym w			mode "workspace"
 	bindsym r			mode "resize"
 
 	bindsym Shift+c 	kill
@@ -329,26 +389,55 @@ mode "focus" {
 	bindsym Escape 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "rofi" {
 	bindsym d			exec rofi -modi drun -show drun;		$!close
 	bindsym p 			exec $udiskie;							$!close
 	bindsym c 			exec rofi -show calc;					$!close
-	bindsym Shift+c 	exec $calendar;							$!close
 
 	bindsym BackSpace	mode "open"
 	bindsym Return 		$!close
 	bindsym Escape 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "open" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
 	bindsym w 			exec /usr/bin/firefox;					$!close
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
 	bindsym Shift+e		exec bash $emacs_daemon;				$!close
 	bindsym t 			exec alacritty;							$!close
+    bindsym n		    exec $nvim;                             $!close
 
 	bindsym r			mode "rofi"
 
@@ -364,9 +453,37 @@ mode "open" {
 	bindsym Escape 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "bottom" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
 	bindsym w 			exec /usr/bin/firefox;					$!close
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
 	bindsym t 			exec alacritty; 						$!close
@@ -382,9 +499,37 @@ mode "bottom" {
 	bindsym Return 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "right" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
 	bindsym w 			exec /usr/bin/firefox;					$!close
 	bindsym e 			exec /sbin/emacsclient -c -a "emacs";	$!close
 	bindsym t 			exec alacritty;							$!close
@@ -400,6 +545,7 @@ mode "right" {
 	bindsym Return 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "headp" {
@@ -413,9 +559,39 @@ mode "headp" {
 	bindsym Return 		$!close
 	bindsym Control+g 	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 mode "screenshot" {
+	set $mv 			move container to workspace
+
+	bindsym l 			workspace 								next
+	bindsym h 			workspace 								prev
+
+	bindsym 1 			workspace 								$ws1
+	bindsym 2 			workspace 								$ws2
+	bindsym 3 			workspace 								$ws3
+	bindsym 4 			workspace 								$ws4
+	bindsym 5 			workspace 								$ws5
+	bindsym 6 			workspace 								$ws6
+	bindsym 7 			workspace 								$ws7
+	bindsym 8 			workspace 								$ws8
+	bindsym 9 			workspace 								$ws9
+	bindsym 0 			workspace 								$ws10
+
+	bindsym Shift+1 	$mv										$ws1
+	bindsym Shift+2 	$mv										$ws2
+	bindsym Shift+3 	$mv										$ws3
+	bindsym Shift+4 	$mv										$ws4
+	bindsym Shift+5 	$mv										$ws5
+	bindsym Shift+6 	$mv										$ws6
+	bindsym Shift+7 	$mv										$ws7
+	bindsym Shift+8 	$mv										$ws8
+	bindsym Shift+9 	$mv										$ws9
+	bindsym Shift+0 	$mv										$ws10
+
+    bindsym t 			exec rofi -show window;					$!close
+
 	bindsym Shift+f		exec $saved_full;						$!close
 	bindsym Shift+s		exec $saved_select;						$!close
 
@@ -427,6 +603,7 @@ mode "screenshot" {
 	bindsym Escape		$!close
 	bindsym Control+g	$!close
 	bindsym $super		$!close
+	bindsym $super2		$!close
 }
 
 
@@ -449,54 +626,56 @@ set						$ws10 "10"
 # workspace assignment #
 ########################
 
-assign [class="Alacritty"] $ws1
-assign [class="(?i)firefox"] $ws2
-assign [class="Thunar"] $ws3
-assign [class="Emacs"] $ws3
-assign [class="steam"] $ws4
-assign [class="lutris"] $ws4
-assign [class="discord"] $ws5
-assign [class="WebCord"] $ws5
-assign [class="factorio"] $ws6
-assign [class="hl_linux"] $ws6
-assign [class="hl2_linux"] $ws6
-assign [class="FTL.amd64"] $ws6
-assign [class="KSP.x86_64"] $ws6
-assign [class="minecraft-launcher"] $ws6
-assign [class="Minecraft Launcher"] $ws6
-assign [class="ftb-app"] $ws6
-assign [class="Minecraft"] $ws6
-assign [class="Poly Bridge 2.x86_64"] $ws6
-assign [class="Starsector 0.95.1a-RC6"] $ws6
-assign [class="steam_app_311340"] $ws6 	# Metal gear solid 5 Ground Zeroes
-assign [class="steam_app_287700"] $ws6 	# Metal gear solid 5 Phantom Pain
-assign [class="steam_app_1328670"] $ws6 	# Mass Effect Legendary Edition
-assign [class="steam_app_1182480"] $ws6 	# EA desktop
-assign [class="steam_app_1366540"] $ws6 	# Dyson Sphere Program
-assign [class="steam_app_954850"] $ws6 	# KSP 2
-assign [class="steam_app_606280"] $ws6 	# darksiders 3
-assign [class="steam_app_1313140"] $ws6 	# Cult of The Lamb
-assign [class="steam_app_548430"] $ws6 	# Deep Rock Galactic
-assign [class="steam_app_1604030"] $ws6 	# V rising
-assign [class="steam_app_235460"] $ws6 	# Metal Gear Rising: Revengence
-assign [class="steam_app_230410"] $ws6	# Warframe
-assign [class="steam_app_1172470"] $ws6	# Apex Legends
-assign [class="steam_app_714070"] $ws6	# Entropy: Zero
-assign [class="Celeste.bin.x86_64"] $ws6
-assign [class="riotclientux.exe"] $ws6
-assign [class="leagueclientux.exe"] $ws6
-assign [class="league of legends.exe"] $ws6
-assign [class="Beyond-All-Reason"] $ws6
-assign [class="gw2-64.exe"] $ws6
-assign [class="battle.net.exe"] $ws6
-assign [class="sc2_x64.exe"] $ws6
-assign [class="portal2_linux"] $ws6
-assign [class="bms_linux"] $ws6
-assign [class="elisa"] $ws7
-assign [class="vlc"] $ws7
-assign [class="YouTube Music"] $ws7
-assign [class="Rhythmbox"] $ws7
-assign [class="Microsoft Teams - Preview"] $ws8
+assign                  [class="Alacritty"]                     $ws1
+assign                  [class="(?i)firefox"]                   $ws2
+assign                  [class="Thunar"]                        $ws3
+assign                  [class="Emacs"]                         $ws3
+assign                  [class="nvim"]                          $ws3
+assign                  [class="neovide"]                       $ws3
+assign                  [class="steam"]                         $ws4
+assign                  [class="lutris"]                        $ws4
+assign                  [class="discord"]                       $ws5
+assign                  [class="WebCord"]                       $ws5
+assign                  [class="factorio"]                      $ws6
+assign                  [class="hl_linux"]                      $ws6
+assign                  [class="hl2_linux"]                     $ws6
+assign                  [class="FTL.amd64"]                     $ws6
+assign                  [class="KSP.x86_64"]                    $ws6
+assign                  [class="minecraft-launcher"]            $ws6
+assign                  [class="Minecraft Launcher"]            $ws6
+assign                  [class="ftb-app"]                       $ws6
+assign                  [class="Minecraft"]                     $ws6
+assign                  [class="Poly Bridge 2.x86_64"]          $ws6
+assign                  [class="Starsector 0.95.1a-RC6"]        $ws6
+assign                  [class="steam_app_311340"]              $ws6 	# Metal gear solid 5 Ground Zeroes
+assign                  [class="steam_app_287700"]              $ws6 	# Metal gear solid 5 Phantom Pain
+assign                  [class="steam_app_1328670"]             $ws6 	# Mass Effect Legendary Edition
+assign                  [class="steam_app_1182480"]             $ws6 	# EA desktop
+assign                  [class="steam_app_1366540"]             $ws6 	# Dyson Sphere Program
+assign                  [class="steam_app_954850"]              $ws6 	# KSP 2
+assign                  [class="steam_app_606280"]              $ws6 	# darksiders 3
+assign                  [class="steam_app_1313140"]             $ws6 	# Cult of The Lamb
+assign                  [class="steam_app_548430"]              $ws6 	# Deep Rock Galactic
+assign                  [class="steam_app_1604030"]             $ws6 	# V rising
+assign                  [class="steam_app_235460"]              $ws6 	# Metal Gear Rising: Revengence
+assign                  [class="steam_app_230410"]              $ws6	# Warframe
+assign                  [class="steam_app_1172470"]             $ws6	# Apex Legends
+assign                  [class="steam_app_714070"]              $ws6	# Entropy: Zero
+assign                  [class="Celeste.bin.x86_64"]            $ws6
+assign                  [class="riotclientux.exe"]              $ws6
+assign                  [class="leagueclientux.exe"]            $ws6
+assign                  [class="league of legends.exe"]         $ws6
+assign                  [class="Beyond-All-Reason"]             $ws6
+assign                  [class="gw2-64.exe"]                    $ws6
+assign                  [class="battle.net.exe"]                $ws6
+assign                  [class="sc2_x64.exe"]                   $ws6
+assign                  [class="portal2_linux"]                 $ws6
+assign                  [class="bms_linux"]                     $ws6
+assign                  [class="elisa"]                         $ws7
+assign                  [class="vlc"]                           $ws7
+assign                  [class="YouTube Music"]                 $ws7
+assign                  [class="Rhythmbox"]                     $ws7
+assign                  [class="Microsoft Teams - Preview"]     $ws8
 
 ###############
 # focus rules #
@@ -514,6 +693,8 @@ for_window 				[class=FTL.amd64] 						focus
 for_window 				[class=KSP.x86_64] 						focus
 for_window 				[class=Rhythmbox] 						focus
 for_window 				[class=Emacs] 							focus
+for_window 				[class=nvim] 							focus; fullscreen
+for_window 				[class=neovide] 						focus; fullscreen
 
 ##################
 # floating rules #
