@@ -125,7 +125,7 @@ mode "main" {
 	bindsym f 			mode "focus"
 	bindsym m 			mode "move"
 	bindsym n			mode "notify"
-	bindsym h			mode "headp"
+	bindsym Shift + h	mode "headp"
 	bindsym i			mode "i3"
 	bindsym w			mode "layout"
 	bindsym s			mode "screenshot"
@@ -284,9 +284,6 @@ mode "resize" {
 mode "move" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
 	bindsym 1 			workspace 								$ws1
 	bindsym 2 			workspace 								$ws2
 	bindsym 3 			workspace 								$ws3
@@ -344,9 +341,6 @@ mode "move" {
 
 mode "focus" {
 	set $mv 			move container to workspace
-
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
 
 	bindsym 1 			workspace 								$ws1
 	bindsym 2 			workspace 								$ws2
