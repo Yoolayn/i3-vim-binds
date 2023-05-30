@@ -89,19 +89,16 @@ mode "main" {
 	set $mv 			move container to workspace
     set $semi			semicolon
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -156,19 +153,16 @@ mode "buffer" {
 mode "layout" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym d			layout default;							$!close
 	bindsym s			layout stacking;						$!close
@@ -225,19 +219,16 @@ mode "notify" {
 mode "resize" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -284,16 +275,16 @@ mode "resize" {
 mode "move" {
 	set $mv 			move container to workspace
 
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -342,16 +333,16 @@ mode "move" {
 mode "focus" {
 	set $mv 			move container to workspace
 
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -402,19 +393,16 @@ mode "rofi" {
 mode "open" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -453,19 +441,16 @@ mode "open" {
 mode "bottom" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -499,19 +484,16 @@ mode "bottom" {
 mode "right" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -559,19 +541,16 @@ mode "headp" {
 mode "screenshot" {
 	set $mv 			move container to workspace
 
-	bindsym l 			workspace 								next
-	bindsym h 			workspace 								prev
-
-	bindsym 1 			workspace 								$ws1
-	bindsym 2 			workspace 								$ws2
-	bindsym 3 			workspace 								$ws3
-	bindsym 4 			workspace 								$ws4
-	bindsym 5 			workspace 								$ws5
-	bindsym 6 			workspace 								$ws6
-	bindsym 7 			workspace 								$ws7
-	bindsym 8 			workspace 								$ws8
-	bindsym 9 			workspace 								$ws9
-	bindsym 0 			workspace 								$ws10
+	bindsym 1 			workspace $ws1							$!close
+	bindsym 2 			workspace $ws2							$!close
+	bindsym 3 			workspace $ws3							$!close
+	bindsym 4 			workspace $ws4							$!close
+	bindsym 5 			workspace $ws5							$!close
+	bindsym 6 			workspace $ws6							$!close
+	bindsym 7 			workspace $ws7							$!close
+	bindsym 8 			workspace $ws8							$!close
+	bindsym 9 			workspace $ws9							$!close
+	bindsym 0 			workspace $ws10							$!close
 
 	bindsym Shift+1 	$mv										$ws1
 	bindsym Shift+2 	$mv										$ws2
@@ -711,19 +690,16 @@ $!exec_always			picom --config  ~/.config/picom.conf
 #############################################
 
 $!exec					rofi-polkit-agent
+$!exec                  steam
+$!exec                  discord
 $!exec					numlockx on
 $!exec					sleep 1 && feh --bg-fill --no-fehbg --randomize $HOME/Pictures/wallpapers/distrotube-wallpapers
 $!exec					dunst
 $!exec					/sbin/emacs --daemon
 $!exec					udiskie -A
+$!exec					alarm-clock-applet -h
+$!exec                  twitch-indicator
 $!exec_always			$HOME/.config/polybar/launch.sh
-
-###############
-# system tray #
-###############
-
-$!exec					nm-applet
-$!exec					alarm-clock-applet
 
 
 ##############################
